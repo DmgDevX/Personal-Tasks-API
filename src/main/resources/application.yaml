@@ -1,3 +1,23 @@
 spring:
-  application:
-    name: taskmanager
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taskmanager
+    username: postgres
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  jackson:
+    time-zone: Europe/Madrid
+
+server:
+  port: 8080
+
+jwt:
+  secret: 8f3b2c1d9a7e6f5b4c3d2a1e9f8b7c6a5d4e3f2b1a9c8d7e6f5b4c3d2a1e9f8
+  expiration: 86400000
