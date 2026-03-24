@@ -19,5 +19,5 @@ server:
   port: 8080
 
 jwt:
-  secret: 8f3b2c1d9a7e6f5b4c3d2a1e9f8b7c6a5d4e3f2b1a9c8d7e6f5b4c3d2a1e9f8
+  secret: VGhpc0lzQVN1cGVyTG9uZ0FuZFNlY3VyZUpXVFNlY3JldEtleUZvckhTMzg0QW5kSXRTaG91bGRCZUxvbmdFbm91Z2g=
   expiration: 86400000
