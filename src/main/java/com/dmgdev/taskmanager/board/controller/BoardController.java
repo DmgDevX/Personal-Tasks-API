@@ -33,4 +33,13 @@ public class BoardController {
     public List<BoardResponse> getMyBoards(Authentication authentication) {
         return boardService.getMyBoards(authentication);
     }
+
+    @DeleteMapping("/{boardId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBoard(
+            @PathVariable Long boardId,
+            Authentication authentication
+    ) {
+        boardService.deleteBoard(boardId, authentication);
+    }
 }

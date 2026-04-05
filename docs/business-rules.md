@@ -5,67 +5,117 @@
 ### Regla 1
 Cada usuario solo puede acceder a sus propios datos.
 
----
-
-## 📋 Tareas
-
 ### Regla 2
-Toda tarea debe pertenecer a un único board.
+Cada usuario solo puede acceder a sus propios boards.
 
 ### Regla 3
-Una tarea no puede existir sin board.
-
-### Regla 4
-Una tarea pertenece a un único usuario.
+Cada usuario solo puede acceder a sus propias tareas.
 
 ---
 
 ## 📂 Boards
 
-### Regla 5 (Eliminación en cascada)
-Si un board es eliminado, todas las tareas asociadas a dicho board se eliminarán automáticamente en cascada.
+### Regla 4
+Cada board pertenece a un único usuario.
 
-### Regla 5.1
-No pueden existir tareas sin board.
-
-### Regla 5.2
-La eliminación es definitiva (hard delete).
-
-### Regla 5.3
-Solo el propietario puede eliminar un board.
-
----
-
-## 📊 Board General
+### Regla 5
+Un usuario puede tener varios boards.
 
 ### Regla 6
-El sistema proporciona una vista general que muestra todas las tareas del usuario.
+Solo el propietario puede crear y consultar sus boards.
 
 ### Regla 7
-El board general no es un contenedor real, sino una vista lógica.
-
-### Regla 8
-No se pueden asignar tareas al board general.
+Actualmente el sistema permite crear y listar boards, pero no editarlos ni eliminarlos.
 
 ---
 
-## 🔄 Estado de tareas
+## 📋 Tareas
+
+### Regla 8
+Toda tarea debe pertenecer a un único board.
 
 ### Regla 9
-Las tareas deben tener un estado válido:
-- PENDING
-- IN_PROGRESS
-- DONE
+Una tarea no puede existir sin board.
+
+### Regla 10
+Cada tarea pertenece indirectamente a un único usuario a través de su board.
+
+### Regla 11
+Solo el propietario puede crear, consultar, actualizar, completar o eliminar sus tareas.
+
+---
+
+## ✅ Estado de tareas
+
+### Regla 12
+El estado funcional de una tarea se representa mediante el campo booleano `completed`.
+
+### Regla 13
+Una tarea puede estar:
+- completada (`true`)
+- no completada (`false`)
+
+### Regla 14
+El sistema dispone de una operación específica para marcar una tarea como completada.
+
+---
+
+## 🚦 Prioridad
+
+### Regla 15
+Toda tarea debe tener una prioridad válida.
+
+### Regla 16
+Las prioridades permitidas son:
+- LOW
+- MEDIUM
+- HIGH
+
+---
+
+## 📅 Fecha límite
+
+### Regla 17
+La fecha límite de una tarea es opcional.
+
+### Regla 18
+Cuando se informa, puede usarse como criterio de filtrado.
+
+---
+
+## 📊 Vista general
+
+### Regla 19
+El sistema proporciona una vista general que muestra todas las tareas del usuario.
+
+### Regla 20
+La vista general no es un board persistido en base de datos, sino una consulta global sobre las tareas del usuario.
+
+---
+
+## 🔍 Filtros
+
+### Regla 21
+Las tareas del usuario pueden filtrarse por:
+- completed
+- priority
+- dueDate
+
+### Regla 22
+Los filtros pueden combinarse entre sí en la vista global.
 
 ---
 
 ## ⚠️ Integridad
 
-### Regla 10
+### Regla 23
 No se permitirá acceso a recursos de otros usuarios.
 
-### Regla 11
-Los identificadores deben ser válidos y existir.
+### Regla 24
+Los identificadores deben ser válidos y existir para operar con boards y tareas.
+
+### Regla 25
+No pueden crearse tareas sobre boards que no pertenezcan al usuario autenticado.
 
 ---
 
@@ -75,3 +125,6 @@ Los identificadores deben ser válidos y existir.
 - no hay múltiples boards por tarea
 - no hay comentarios
 - no hay roles complejos
+- no hay borrado de boards implementado actualmente
+- no hay paginación
+- no hay búsqueda por texto

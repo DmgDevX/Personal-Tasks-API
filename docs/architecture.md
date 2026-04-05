@@ -1,6 +1,7 @@
 # 🏗️ Arquitectura del Sistema
 
 ## 📌 Enfoque
+
 Arquitectura basada en capas siguiendo buenas prácticas de Spring Boot.
 
 ---
@@ -9,77 +10,29 @@ Arquitectura basada en capas siguiendo buenas prácticas de Spring Boot.
 
 ### Controller
 - expone endpoints REST
-- valida inputs
-- maneja requests/responses
+- recibe requests
+- delega en la capa de servicio
+- devuelve responses
 
 ### Service
-- lógica de negocio
-- validaciones
-- reglas
+- implementa la lógica de negocio
+- valida reglas funcionales
+- comprueba la pertenencia de recursos al usuario autenticado
 
 ### Repository
 - acceso a datos
-- JPA
+- consultas JPA
+- operaciones CRUD
 
 ---
 
-## 📦 Estructura
+## 📦 Estructura del proyecto
+
+```text
 com.dmgdev.taskmanager
 │
-├── controller
-├── service
-├── repository
-├── entity
-├── dto
-├── mapper
+├── auth
+├── board
 ├── security
-├── config
-└── exception
-
----
-
-## 🔐 Seguridad
-
-- autenticación JWT
-- stateless
-- Spring Security
-
----
-
-## 🗄️ Persistencia
-
-- PostgreSQL
-- JPA/Hibernate
-
----
-
-## 🔄 Flujo
-
-Request → Controller → Service → Repository → DB  
-Response ← Controller
-
----
-
-## 📌 Decisiones técnicas
-
-### JWT
-- escalable
-- stateless
-- estándar REST
-
-### PostgreSQL
-- robusto
-- relacional
-
-### JPA
-- integración con Spring
-- simplificación ORM
-
----
-
-## 🚀 Escalabilidad
-
-El sistema está preparado para:
-- añadir nuevas entidades
-- ampliar lógica de negocio
-- evolucionar a microservicios
+├── task
+└── user

@@ -1,9 +1,12 @@
 package com.dmgdev.taskmanager.board.entity;
 
+import com.dmgdev.taskmanager.task.entity.Task;
 import com.dmgdev.taskmanager.user.entity.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "boards")
@@ -25,6 +28,9 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<>();
 
     public Board() {
     }
@@ -62,6 +68,10 @@ public class Board {
         return user;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -80,5 +90,9 @@ public class Board {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

@@ -9,7 +9,7 @@ El proyecto consiste en desarrollar una API REST para la gestión personal de ta
 Construir una API backend robusta que permita:
 - gestionar tareas personales
 - organizarlas mediante boards
-- aplicar filtros, búsquedas y paginación
+- aplicar filtros y búsquedas
 - implementar autenticación segura mediante JWT
 
 ---
@@ -27,7 +27,6 @@ Construir una API backend robusta que permita:
 ### RF-02. Boards
 - crear board
 - listar boards
-- editar board
 - eliminar board
 - consultar tareas de un board
 

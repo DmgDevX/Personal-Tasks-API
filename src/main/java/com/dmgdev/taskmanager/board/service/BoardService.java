@@ -43,6 +43,15 @@ public class BoardService {
                 .toList();
     }
 
+    public void deleteBoard(Long boardId, Authentication authentication) {
+        User currentUser = getCurrentUser(authentication);
+
+        Board board = boardRepository.findByIdAndUserId(boardId, currentUser.getId())
+                .orElseThrow(() -> new RuntimeException("Board no encontrado o no pertenece al usuario autenticado"));
+
+        boardRepository.delete(board);
+    }
+
     private User getCurrentUser(Authentication authentication) {
         String email = authentication.getName();
 
