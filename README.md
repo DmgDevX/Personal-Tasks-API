@@ -39,13 +39,29 @@ Aplicación individual tipo gestor de tareas/notas del móvil.
 
 ## 🛠️ Stack
 
+### Backend
 - Java 21
 - Spring Boot
 - Spring Security
 - JWT
 - PostgreSQL
-- JPA/Hibernate
-- Swagger
+- JPA / Hibernate
+- Swagger / OpenAPI
+
+### Frontend
+- React
+- TypeScript
+- Vite
+- Material UI
+- Axios
+- React Router DOM
+
+### Testing
+- JUnit 5
+- Mockito
+- Spring Boot Test
+- MockMvc
+- H2 Database
 
 ---
 
@@ -53,3 +69,7 @@ Aplicación individual tipo gestor de tareas/notas del móvil.
 
 ```bash
 mvn spring-boot:run
+mvn test
+npm install
+npm run dev
+
