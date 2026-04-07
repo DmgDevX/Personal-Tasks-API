@@ -12,8 +12,6 @@ API REST para gestión personal de tareas organizadas por boards.
 - filtros y búsqueda
 - paginación
 - arquitectura limpia
-- documentación Swagger
-- Docker
 
 ---
 
