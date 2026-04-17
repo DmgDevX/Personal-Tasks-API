@@ -10,6 +10,8 @@ import {
   Stack,
   Switch,
   TextField,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import type { Task, TaskPriority } from "../../types/task";
 
@@ -35,6 +37,9 @@ export default function EditTaskDialog({
   onClose,
   onSubmit,
 }: EditTaskDialogProps) {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<TaskPriority>("MEDIUM");
@@ -72,10 +77,16 @@ export default function EditTaskDialog({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      fullScreen={fullScreen}
+      maxWidth="sm"
+    >
       <DialogTitle>Editar tarea</DialogTitle>
 
-      <DialogContent>
+      <DialogContent sx={{ px: { xs: 2, sm: 3 } }}>
         <Stack spacing={2} sx={{ pt: 1 }}>
           <TextField
             label="Título"
@@ -122,16 +133,28 @@ export default function EditTaskDialog({
               />
             }
             label="Completada"
+            sx={{ alignSelf: "flex-start" }}
           />
         </Stack>
       </DialogContent>
 
-      <DialogActions sx={{ px: 3, pb: 3 }}>
-        <Button onClick={onClose}>Cancelar</Button>
+      <DialogActions
+        sx={{
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 2, sm: 3 },
+          flexDirection: { xs: "column-reverse", sm: "row" },
+          gap: 1,
+        }}
+      >
+        <Button onClick={onClose} sx={{ width: { xs: "100%", sm: "auto" } }}>
+          Cancelar
+        </Button>
+
         <Button
           variant="contained"
           onClick={handleSubmit}
           disabled={loading || !title.trim()}
+          sx={{ width: { xs: "100%", sm: "auto" } }}
         >
           Guardar
         </Button>

@@ -6,14 +6,26 @@ interface TaskFiltersProps {
   onChange: (filters: TaskFiltersState) => void;
 }
 
-export default function TaskFilters({ filters, onChange }: TaskFiltersProps) {
+export default function TaskFilters({
+  filters,
+  onChange,
+}: TaskFiltersProps) {
   return (
-    <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+    <Stack
+      direction={{ xs: "column", md: "row" }}
+      spacing={2}
+      sx={{ width: "100%" }}
+    >
       <TextField
         select
         label="Estado"
         value={filters.completed}
-        onChange={(e) => onChange({ ...filters, completed: e.target.value as TaskFiltersState["completed"] })}
+        onChange={(e) =>
+          onChange({
+            ...filters,
+            completed: e.target.value as TaskFiltersState["completed"],
+          })
+        }
         fullWidth
       >
         <MenuItem value="all">Todos</MenuItem>
@@ -25,7 +37,12 @@ export default function TaskFilters({ filters, onChange }: TaskFiltersProps) {
         select
         label="Prioridad"
         value={filters.priority}
-        onChange={(e) => onChange({ ...filters, priority: e.target.value as TaskFiltersState["priority"] })}
+        onChange={(e) =>
+          onChange({
+            ...filters,
+            priority: e.target.value as TaskFiltersState["priority"],
+          })
+        }
         fullWidth
       >
         <MenuItem value="all">Todas</MenuItem>

@@ -7,6 +7,8 @@ import {
   DialogTitle,
   Stack,
   TextField,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 
 interface CreateBoardDialogProps {
@@ -15,7 +17,14 @@ interface CreateBoardDialogProps {
   onSubmit: (data: { name: string; description: string }) => Promise<void>;
 }
 
-export default function CreateBoardDialog({ open, onClose, onSubmit }: CreateBoardDialogProps) {
+export default function CreateBoardDialog({
+  open,
+  onClose,
+  onSubmit,
+}: CreateBoardDialogProps) {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,9 +42,16 @@ export default function CreateBoardDialog({ open, onClose, onSubmit }: CreateBoa
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      fullScreen={fullScreen}
+      maxWidth="sm"
+    >
       <DialogTitle>Crear board</DialogTitle>
-      <DialogContent>
+
+      <DialogContent sx={{ px: { xs: 2, sm: 3 } }}>
         <Stack spacing={2} sx={{ pt: 1 }}>
           <TextField
             label="Nombre"
@@ -43,6 +59,7 @@ export default function CreateBoardDialog({ open, onClose, onSubmit }: CreateBoa
             onChange={(e) => setName(e.target.value)}
             fullWidth
           />
+
           <TextField
             label="Descripción"
             value={description}
@@ -53,9 +70,25 @@ export default function CreateBoardDialog({ open, onClose, onSubmit }: CreateBoa
           />
         </Stack>
       </DialogContent>
-      <DialogActions sx={{ px: 3, pb: 3 }}>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button variant="contained" onClick={handleSubmit} disabled={loading || !name.trim()}>
+
+      <DialogActions
+        sx={{
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 2, sm: 3 },
+          flexDirection: { xs: "column-reverse", sm: "row" },
+          gap: 1,
+        }}
+      >
+        <Button onClick={onClose} sx={{ width: { xs: "100%", sm: "auto" } }}>
+          Cancelar
+        </Button>
+
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={loading || !name.trim()}
+          sx={{ width: { xs: "100%", sm: "auto" } }}
+        >
           Crear
         </Button>
       </DialogActions>

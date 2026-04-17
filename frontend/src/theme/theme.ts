@@ -31,14 +31,23 @@ export const theme = createTheme({
     },
     divider: alpha("#8AA4FF", 0.15),
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   typography: {
     fontFamily: "'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif",
-    h1: { fontWeight: 800 },
-    h2: { fontWeight: 800 },
-    h3: { fontWeight: 700 },
-    h4: { fontWeight: 700 },
-    h5: { fontWeight: 700 },
-    h6: { fontWeight: 700 },
+    h1: { fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.75rem)" },
+    h2: { fontWeight: 800, fontSize: "clamp(1.75rem, 4vw, 3rem)" },
+    h3: { fontWeight: 700, fontSize: "clamp(1.5rem, 3vw, 2.5rem)" },
+    h4: { fontWeight: 700, fontSize: "clamp(1.3rem, 2.5vw, 2rem)" },
+    h5: { fontWeight: 700, fontSize: "clamp(1.15rem, 2vw, 1.5rem)" },
+    h6: { fontWeight: 700, fontSize: "clamp(1rem, 1.5vw, 1.25rem)" },
     button: {
       textTransform: "none",
       fontWeight: 700,
@@ -83,6 +92,19 @@ export const theme = createTheme({
           borderRadius: 14,
           backgroundColor: alpha("#0B1220", 0.7),
         },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          width: "100%",
+          margin: 16,
+        },
+      },
+    },
+    MuiContainer: {
+      defaultProps: {
+        maxWidth: "xl",
       },
     },
   },

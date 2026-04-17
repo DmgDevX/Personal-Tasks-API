@@ -46,17 +46,25 @@ export default function BoardList({
       <ListItemButton
         selected={selectedBoardId === null}
         onClick={() => onSelectBoard(null)}
-        sx={{ borderRadius: 3 }}
+        sx={{
+          borderRadius: 3,
+          alignItems: "flex-start",
+          gap: 1,
+          flexWrap: "wrap",
+        }}
       >
         <ListItemText
           primary="Todas las tareas"
           secondary="Vista general de todas tus tareas"
+          primaryTypographyProps={{ noWrap: false }}
+          secondaryTypographyProps={{ sx: { wordBreak: "break-word" } }}
         />
         <Chip
           size="small"
           label="Global"
           color="secondary"
           variant={selectedBoardId === null ? "filled" : "outlined"}
+          sx={{ maxWidth: "100%" }}
         />
       </ListItemButton>
 
@@ -66,11 +74,17 @@ export default function BoardList({
           direction="row"
           spacing={1}
           alignItems="flex-start"
+          sx={{ minWidth: 0 }}
         >
           <ListItemButton
             selected={selectedBoardId === board.id}
             onClick={() => onSelectBoard(board.id)}
-            sx={{ borderRadius: 3, alignItems: "flex-start", flex: 1 }}
+            sx={{
+              borderRadius: 3,
+              alignItems: "flex-start",
+              flex: 1,
+              minWidth: 0,
+            }}
           >
             <ListItemText
               primary={board.name}
@@ -79,17 +93,19 @@ export default function BoardList({
                   component="span"
                   variant="body2"
                   color="text.secondary"
+                  sx={{ wordBreak: "break-word" }}
                 >
                   {board.description || "Sin descripción"}
                 </Typography>
               }
+              primaryTypographyProps={{ sx: { wordBreak: "break-word" } }}
             />
           </ListItemButton>
 
           <Tooltip title="Eliminar board">
             <IconButton
               onClick={() => onDeleteBoard(board.id)}
-              sx={{ mt: 0.5 }}
+              sx={{ mt: 0.5, flexShrink: 0 }}
             >
               <DeleteOutlineRoundedIcon />
             </IconButton>

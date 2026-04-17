@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Chip,
   Divider,
@@ -21,7 +22,9 @@ interface TaskCardProps {
   onDelete: (taskId: number) => Promise<void>;
 }
 
-function getPriorityColor(priority: Task["priority"]): "success" | "warning" | "error" {
+function getPriorityColor(
+  priority: Task["priority"]
+): "success" | "warning" | "error" {
   switch (priority) {
     case "LOW":
       return "success";
@@ -32,23 +35,56 @@ function getPriorityColor(priority: Task["priority"]): "success" | "warning" | "
   }
 }
 
-export default function TaskCard({ task, onComplete, onEdit, onDelete }: TaskCardProps) {
+export default function TaskCard({
+  task,
+  onComplete,
+  onEdit,
+  onDelete,
+}: TaskCardProps) {
   return (
-    <FuturisticCard sx={{ p: 2.2 }}>
+    <FuturisticCard sx={{ p: { xs: 1.75, sm: 2.2 }, width: "100%" }}>
       <Stack spacing={2}>
-        <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={2}>
-          <Stack spacing={1}>
-            <Typography variant="h6" sx={{ textDecoration: task.completed ? "line-through" : "none" }}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          alignItems={{ xs: "stretch", sm: "flex-start" }}
+          spacing={2}
+        >
+          <Stack spacing={1} sx={{ minWidth: 0, flex: 1, textAlign: "left" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                textDecoration: task.completed ? "line-through" : "none",
+                wordBreak: "break-word",
+                fontSize: { xs: "1rem", sm: "1.15rem" },
+              }}
+            >
               {task.title}
             </Typography>
+
             <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-              <Chip label={task.completed ? "Completada" : "Pendiente"} color={task.completed ? "success" : "default"} />
-              <Chip label={getPriorityLabel(task.priority)} color={getPriorityColor(task.priority)} variant="outlined" />
-              <Chip label={`Vence: ${formatDate(task.dueDate)}`} variant="outlined" />
+              <Chip
+                label={task.completed ? "Completada" : "Pendiente"}
+                color={task.completed ? "success" : "default"}
+              />
+              <Chip
+                label={getPriorityLabel(task.priority)}
+                color={getPriorityColor(task.priority)}
+                variant="outlined"
+              />
+              <Chip
+                label={`Vence: ${formatDate(task.dueDate)}`}
+                variant="outlined"
+              />
             </Stack>
           </Stack>
 
-          <Stack direction="row" spacing={0.5}>
+          <Stack
+            direction="row"
+            spacing={0.5}
+            justifyContent={{ xs: "flex-end", sm: "flex-start" }}
+            sx={{ flexShrink: 0 }}
+          >
             <Tooltip title="Editar">
               <IconButton onClick={() => onEdit(task)}>
                 <EditOutlinedIcon />
@@ -64,13 +100,24 @@ export default function TaskCard({ task, onComplete, onEdit, onDelete }: TaskCar
 
         <Divider />
 
-        <Typography variant="body2" color="text.secondary">
-          {task.description || "Sin descripción"}
-        </Typography>
+        <Box sx={{ textAlign: "left" }}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ wordBreak: "break-word" }}
+          >
+            {task.description || "Sin descripción"}
+          </Typography>
+        </Box>
 
         {!task.completed && (
-          <Stack direction="row" justifyContent="flex-end">
-            <Button variant="contained" startIcon={<CheckCircleOutlineRoundedIcon />} onClick={() => onComplete(task.id)}>
+          <Stack direction="row" justifyContent={{ xs: "stretch", sm: "flex-end" }}>
+            <Button
+              variant="contained"
+              startIcon={<CheckCircleOutlineRoundedIcon />}
+              onClick={() => onComplete(task.id)}
+              sx={{ width: { xs: "100%", sm: "auto" } }}
+            >
               Marcar como completada
             </Button>
           </Stack>

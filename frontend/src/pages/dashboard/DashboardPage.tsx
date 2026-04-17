@@ -240,21 +240,25 @@ export default function DashboardPage() {
         window.location.href = "/login";
       }}
     >
-      <Stack spacing={3}>
+      <Stack spacing={{ xs: 2, md: 3 }}>
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "320px 1fr" },
-            gap: 3,
+            gridTemplateColumns: {
+              xs: "1fr",
+              lg: "300px minmax(0, 1fr)",
+            },
+            gap: { xs: 2, md: 3 },
             alignItems: "start",
           }}
         >
-          <FuturisticCard sx={{ p: 2.5 }}>
+          <FuturisticCard sx={{ p: { xs: 2, sm: 2.5 } }}>
             <Stack spacing={2.5}>
               <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                spacing={1.5}
               >
                 <Typography variant="h6">Boards</Typography>
 
@@ -263,6 +267,10 @@ export default function DashboardPage() {
                   variant="contained"
                   startIcon={<AddRoundedIcon />}
                   onClick={() => setCreateBoardOpen(true)}
+                  sx={{
+                    minWidth: { xs: "auto", sm: 100 },
+                    whiteSpace: "nowrap",
+                  }}
                 >
                   Crear
                 </Button>
@@ -277,21 +285,22 @@ export default function DashboardPage() {
             </Stack>
           </FuturisticCard>
 
-          <Stack spacing={3}>
+          <Stack spacing={{ xs: 2, md: 3 }} sx={{ minWidth: 0 }}>
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns: {
                   xs: "1fr",
-                  md: "repeat(3, minmax(0, 1fr))",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  xl: "repeat(3, minmax(0, 1fr))",
                 },
                 gap: 2,
               }}
             >
-              <FuturisticCard sx={{ p: 2.5 }}>
+              <FuturisticCard sx={{ p: { xs: 2, sm: 2.5 } }}>
                 <Stack direction="row" spacing={2} alignItems="center">
                   <DashboardCustomizeRoundedIcon color="primary" />
-                  <Box>
+                  <Box sx={{ minWidth: 0 }}>
                     <Typography variant="body2" color="text.secondary">
                       Boards
                     </Typography>
@@ -300,10 +309,10 @@ export default function DashboardPage() {
                 </Stack>
               </FuturisticCard>
 
-              <FuturisticCard sx={{ p: 2.5 }}>
+              <FuturisticCard sx={{ p: { xs: 2, sm: 2.5 } }}>
                 <Stack direction="row" spacing={2} alignItems="center">
                   <AssignmentTurnedInRoundedIcon color="secondary" />
-                  <Box>
+                  <Box sx={{ minWidth: 0 }}>
                     <Typography variant="body2" color="text.secondary">
                       Tareas totales
                     </Typography>
@@ -312,7 +321,12 @@ export default function DashboardPage() {
                 </Stack>
               </FuturisticCard>
 
-              <FuturisticCard sx={{ p: 2.5 }}>
+              <FuturisticCard
+                sx={{
+                  p: { xs: 2, sm: 2.5 },
+                  gridColumn: { xs: "auto", sm: "1 / -1", xl: "auto" },
+                }}
+              >
                 <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
                   <Chip label={`Pendientes: ${summary.pending}`} color="warning" />
                   <Chip
@@ -323,7 +337,7 @@ export default function DashboardPage() {
               </FuturisticCard>
             </Box>
 
-            <FuturisticCard sx={{ p: 2.5 }}>
+            <FuturisticCard sx={{ p: { xs: 2, sm: 2.5 } }}>
               <Stack spacing={2.5}>
                 <Stack
                   direction={{ xs: "column", md: "row" }}
@@ -331,8 +345,14 @@ export default function DashboardPage() {
                   alignItems={{ xs: "stretch", md: "center" }}
                   spacing={2}
                 >
-                  <Box>
-                    <Typography variant="h5">
+                  <Box sx={{ minWidth: 0, textAlign: "left" }}>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        wordBreak: "break-word",
+                        fontSize: { xs: "1.25rem", sm: "1.5rem" },
+                      }}
+                    >
                       {selectedBoardId === null
                         ? "Todas tus tareas"
                         : boards.find((board) => board.id === selectedBoardId)
@@ -349,6 +369,7 @@ export default function DashboardPage() {
                     startIcon={<AddRoundedIcon />}
                     onClick={() => setCreateTaskOpen(true)}
                     disabled={!boards.length}
+                    sx={{ width: { xs: "100%", md: "auto" } }}
                   >
                     Nueva tarea
                   </Button>

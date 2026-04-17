@@ -8,6 +8,8 @@ import {
   MenuItem,
   Stack,
   TextField,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import type { Board } from "../../types/board";
 import type { TaskPriority } from "../../types/task";
@@ -33,6 +35,9 @@ export default function CreateTaskDialog({
   selectedBoardId,
   onSubmit,
 }: CreateTaskDialogProps) {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<TaskPriority>("MEDIUM");
@@ -69,11 +74,24 @@ export default function CreateTaskDialog({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      fullScreen={fullScreen}
+      maxWidth="sm"
+    >
       <DialogTitle>Crear tarea</DialogTitle>
-      <DialogContent>
+
+      <DialogContent sx={{ px: { xs: 2, sm: 3 } }}>
         <Stack spacing={2} sx={{ pt: 1 }}>
-          <TextField label="Título" value={title} onChange={(e) => setTitle(e.target.value)} fullWidth />
+          <TextField
+            label="Título"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            fullWidth
+          />
+
           <TextField
             label="Descripción"
             value={description}
@@ -82,11 +100,19 @@ export default function CreateTaskDialog({
             minRows={3}
             fullWidth
           />
-          <TextField select label="Prioridad" value={priority} onChange={(e) => setPriority(e.target.value as TaskPriority)} fullWidth>
+
+          <TextField
+            select
+            label="Prioridad"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value as TaskPriority)}
+            fullWidth
+          >
             <MenuItem value="LOW">Baja</MenuItem>
             <MenuItem value="MEDIUM">Media</MenuItem>
             <MenuItem value="HIGH">Alta</MenuItem>
           </TextField>
+
           <TextField
             label="Fecha límite"
             type="date"
@@ -95,7 +121,14 @@ export default function CreateTaskDialog({
             InputLabelProps={{ shrink: true }}
             fullWidth
           />
-          <TextField select label="Board" value={boardId || ""} onChange={(e) => setBoardId(Number(e.target.value))} fullWidth>
+
+          <TextField
+            select
+            label="Board"
+            value={boardId || ""}
+            onChange={(e) => setBoardId(Number(e.target.value))}
+            fullWidth
+          >
             {boards.map((board) => (
               <MenuItem key={board.id} value={board.id}>
                 {board.name}
@@ -104,9 +137,25 @@ export default function CreateTaskDialog({
           </TextField>
         </Stack>
       </DialogContent>
-      <DialogActions sx={{ px: 3, pb: 3 }}>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button variant="contained" onClick={handleSubmit} disabled={loading || !title.trim() || !boardId}>
+
+      <DialogActions
+        sx={{
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 2, sm: 3 },
+          flexDirection: { xs: "column-reverse", sm: "row" },
+          gap: 1,
+        }}
+      >
+        <Button onClick={onClose} sx={{ width: { xs: "100%", sm: "auto" } }}>
+          Cancelar
+        </Button>
+
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={loading || !title.trim() || !boardId}
+          sx={{ width: { xs: "100%", sm: "auto" } }}
+        >
           Crear
         </Button>
       </DialogActions>
