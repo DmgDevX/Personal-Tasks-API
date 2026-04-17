@@ -17,7 +17,7 @@ API REST para gestión personal de tareas organizadas por boards.
 
 ## 🧠 Concepto
 
-Aplicación individual tipo gestor de tareas/notas del móvil.
+Aplicación web de gestión de tareas orientada a uso individual.
 
 - cada usuario gestiona sus tareas
 - no hay colaboración
